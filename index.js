@@ -6,6 +6,9 @@ var todoRoutes = require("./routes/todos");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/views"));
+
 
 //Must git bash ./mongod inside "data"
 //directory where Mongodb is installed first
@@ -32,7 +35,7 @@ MongoClient.connect(url, function(err, client) {
 
 
 app.get("/", function(req, res){
-    res.send("Hi there from root route");
+    res.sendfile("index.html");
 });
 
 app.use("/api/todos", todoRoutes);
